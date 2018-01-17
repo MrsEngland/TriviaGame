@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Trivia Game</title>
+  
+  <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
+  <link rel="javascript" type="text/javascript" href="../assets/javascript/app.js">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+</head>
+<body>
+
+    <div class ="jumbotron"></div>
+
+      <div class = "container">
+      <img src = "../assets/images/questionmark.jpg">
+      </div>
+
+     
+      <button id="start"> Start the Game </button>
+      <div id="show-number"></div>
+      <div id="quiz"></div>
+      <button id="submit">Get Results</button>
+      <div id="results"></div>
+ 
+ <!-- JAVASCRIPT -->
+ 
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <script type="text/javascript">
+
+var questions = 
+      [{
+       question: "What is the largest freshwater lake in the world?",
+        answers: [
+          "Lake Superior     ",
+          "Lake Michigan     ", 
+          "Lake Tahoe     " 
+        ],
+       correctAnswer: "Lake Superior"
+      },
+      {
+      question: "Where would you find the sea of Tranquility?",
+      answers: [
+        "Mars     ",
+        "Saturn     ", 
+        "Moon     "
+      ],
+      correctAnswer: "Moon"
+      }];
+   
+        var number = 10;
+        var intervalId;
+
+        // ******************** timer starts on load.  does not wait for click?  
+        $("#start").on("click", run);
+            function run() {
+            intervalId = setInterval(decrement, 1000);
+            }
+                function decrement() {
+                number--;
+                $("#show-number").html("<h2>" + number + "</h2>");
+                if (number === 0) {
+                  stop();
+                  $("#show-number").html("<h2>" +"Time is up. Click submit to see your results." + "</h2>");
+                } }
+                function stop() {
+                  clearInterval(intervalId);
+                }
+            run();
+
+//  ********************  Can only click one radio button on the screen, not one per questions 
+   for (var i = 0; i < questions.length; i++) {
+       $("#quiz").append("<h2>" + questions[i].question + "</h2>");
+        for (var j = 0; j < questions[i].answers.length; j++) {
+          $("#quiz").append ("<input type = 'radio' name = 'question-'" + i + "'value ='" + questions[i].answers[j] + "''>" + questions[i].answers[j]);  
+          }
+        }
+
+    // var totalQuestions = questions.length;   
+    // var rightAnswer = 0;
+    // var wrongAnswer = 0;
+
+    // **********  does not like else statement?  unexpected token else?  
+
+    // for (i=0; i < questions.length; i++) {
+    //   if (questions[i].answers.checked === questions.correctAnswer) {
+    //    rightAnswer++;
+    //   $("#results").append("<h3>" + "Total Questions: " + totalQuestions + "</h3>");
+    //   $("#results").append("<h3>" + "Correct Answers: " + rightAnswer + "</h3>");
+    //  } 
+    //  else {
+    //    (questions[i].answers.checked !== question.correctAnswer);
+    //    wrongAnswer++;
+    //   $("#results").append("<h3>" + "Wrong Answers: " + wrongAnswer + "</h3>");
+    //  }}
+     
+
+
+  </script>
+</body>
+</html>
