@@ -16,11 +16,10 @@
       <img src = "../assets/images/questionmark.jpg">
       </div>
 
-     
       <button id="start"> Start the Game </button>
       <div id="show-number"></div>
       <div id="quiz"></div>
-      <button id="submit">Get Results</button>
+      <button id="submit"> Get Results </button>
       <div id="results"></div>
  
  <!-- JAVASCRIPT -->
@@ -33,26 +32,36 @@ var questions =
       [{
        question: "What is the largest freshwater lake in the world?",
         answers: [
-          "Lake Superior     ",
-          "Lake Michigan     ", 
-          "Lake Tahoe     " 
+          "Lake Superior",
+          "Lake Michigan", 
+          "Lake Tahoe" 
         ],
        correctAnswer: "Lake Superior"
       },
       {
       question: "Where would you find the sea of Tranquility?",
       answers: [
-        "Mars     ",
-        "Saturn     ", 
-        "Moon     "
+        "Mars",
+        "Saturn", 
+        "Moon"
       ],
       correctAnswer: "Moon"
       }];
-   
+      var totalQuestions = questions.length;   
+      var rightAnswer = 0;
+      var wrongAnswer = 0;
+
+
+       for (var i = 0; i < questions.length; i++) {
+       $("#quiz").append("<h2>" + questions[i].question + "</h2>");
+        for (var j = 0; j < questions[i].answers.length; j++) 
+          $("#quiz").append ("<input type = 'radio' name = 'question-" + i + "'value ='" + questions[i].answers[j] + "''>" + questions[i].answers[j]);  
+          }
+
+
         var number = 10;
         var intervalId;
 
-        // ******************** timer starts on load.  does not wait for click?  
         $("#start").on("click", run);
             function run() {
             intervalId = setInterval(decrement, 1000);
@@ -62,40 +71,36 @@ var questions =
                 $("#show-number").html("<h2>" + number + "</h2>");
                 if (number === 0) {
                   stop();
-                  $("#show-number").html("<h2>" +"Time is up. Click submit to see your results." + "</h2>");
+                  $("#show-number").html("<h2>" +"Time is up." + "</h2>");
                 } }
                 function stop() {
                   clearInterval(intervalId);
                 }
-            run();
+    run();
+        
+      var totalQuestions = questions.length;   
+      var rightAnswer = 0;
+      var wrongAnswer = 0;
 
-//  ********************  Can only click one radio button on the screen, not one per questions 
-   for (var i = 0; i < questions.length; i++) {
-       $("#quiz").append("<h2>" + questions[i].question + "</h2>");
-        for (var j = 0; j < questions[i].answers.length; j++) {
-          $("#quiz").append ("<input type = 'radio' name = 'question-'" + i + "'value ='" + questions[i].answers[j] + "''>" + questions[i].answers[j]);  
-          }
-        }
+    $("#submit").on("click", score);
+     function score () {
+     for (i=0; i < questions.length; i++) {
+       if ($('input[name="questions-' + i + '"]:checked').val() === questions[i].correctAnswer) {
+       
+       rightAnswer++;
+       } 
+       else {
+        wrongAnswer++;
+       }}
+       }
+  
+  score ();
 
-    // var totalQuestions = questions.length;   
-    // var rightAnswer = 0;
-    // var wrongAnswer = 0;
+     $("#results").append("<h3>" + "Total Questions: " + totalQuestions + "</h3>");
+     $("#results").append("<h3>" + "Correct Answers: " + rightAnswer + "</h3>");
+     $("#results").append("<h3>" + "Wrong Answers: " + wrongAnswer + "</h3>");     
 
-    // **********  does not like else statement?  unexpected token else?  
-
-    // for (i=0; i < questions.length; i++) {
-    //   if (questions[i].answers.checked === questions.correctAnswer) {
-    //    rightAnswer++;
-    //   $("#results").append("<h3>" + "Total Questions: " + totalQuestions + "</h3>");
-    //   $("#results").append("<h3>" + "Correct Answers: " + rightAnswer + "</h3>");
-    //  } 
-    //  else {
-    //    (questions[i].answers.checked !== question.correctAnswer);
-    //    wrongAnswer++;
-    //   $("#results").append("<h3>" + "Wrong Answers: " + wrongAnswer + "</h3>");
-    //  }}
-     
-
+  stop(); 
 
   </script>
 </body>
