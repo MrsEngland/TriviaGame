@@ -1,0 +1,55 @@
+
+      .jumbotron {
+      	width: 85%;
+      	border:3px solid black;
+      	background-image: url("http://triviatime.com.au/TTlogo.JPG");
+      	background-size:auto;
+      	background-position: center center;
+		}
+
+      	
+	  #start {
+      	color:red;
+      	background-color: yellow;
+      	text-align: center;
+      	width: 20%;
+      	border: 2px solid black;
+      	padding: 5px 100px 5px 100px;
+      	margin: 5px 150px 5px 150px;
+      }
+
+      #show-number {
+      	color: blue;
+      	width: 80%;
+      	text-align: center;
+      	padding: 5px;
+      	margin: 5px;
+      }
+
+      #quiz{
+      	color: green;
+      	border: 3px solid black;
+      	width: 80%;
+      	text-align:center;
+      	padding: 5px 25px 5px 25px;
+      	margin: 5px 25px 5px 25px;
+      }
+
+      #submit {
+      	color:red;
+      	background-color: yellow;
+      	text-align: center;
+      	width: 20%;
+      	border:2px solid black;
+      	padding: 5px 100px 5px 100px;
+      	margin: 5px 150px 5px 150px;
+      } 
+
+      #results {
+      	color:brown;
+      	border: 3px solid black;
+      	width: 80%;
+      	text-align: center;
+      	padding: 5px 25px 5px 25px;
+      	margin: 5px 25px 5px 25px;
+      }

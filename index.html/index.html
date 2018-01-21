@@ -3,30 +3,29 @@
 <head>
   <title>Trivia Game</title>
   
-  <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
+ 
   <link rel="javascript" type="text/javascript" href="../assets/javascript/app.js">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
 
 </head>
 <body>
 
     <div class ="jumbotron"></div>
 
-      <div class = "container">
-      <img src = "../assets/images/questionmark.jpg">
-      </div>
-
       <button id="start"> Start the Game </button>
-      <div id="show-number"></div>
-      <div id="quiz"></div>
-      <button id="submit"> Get Results </button>
+      <button id="submit"> Get Results </button><br>
       <div id="results"></div>
- 
- <!-- JAVASCRIPT -->
- 
+      <div id="show-number"></div><br>
+      <div id="quiz"></div><br>
+      
+  
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
   <script type="text/javascript">
+
+
+
 
 var questions = 
       [{
@@ -46,10 +45,35 @@ var questions =
         "Moon"
       ],
       correctAnswer: "Moon"
-      }];
-      var totalQuestions = questions.length;   
-      var rightAnswer = 0;
-      var wrongAnswer = 0;
+      },
+      {
+      question: "What is someone who shoes horses called?",
+      answers: [
+      "Farrier",
+      "Horseshoer",
+      "Cobbler"
+      ],
+      correctAnswer: "Farrier"
+      },
+      {
+      question: "What kind of weapon is a falchion?",
+      answers:[
+      "Sword",
+      "Gun",
+      "Knife"
+      ],
+      correctAnswer: "Sword"
+      },
+      {
+      question: "What is the seventh planet from the sun?",
+      answers:[
+      "Saturn",
+      "Neptune",
+      "Uranus"
+      ],
+      correctAnswer: "Uranus"
+      },
+      ];
 
 
        for (var i = 0; i < questions.length; i++) {
@@ -59,48 +83,59 @@ var questions =
           }
 
 
+
+//  I wanted to make a function so the timer could not be restarted if it was already running. I was unable to make this work properly.
         var number = 10;
         var intervalId;
+        // var clockRunning = false;
 
         $("#start").on("click", run);
+
             function run() {
-            intervalId = setInterval(decrement, 1000);
+              // if (!clockRunning) {
+                 intervalId = setInterval(decrement, 1000);
+                 // clockRunning = true;
+            // }
             }
                 function decrement() {
                 number--;
-                $("#show-number").html("<h2>" + number + "</h2>");
+                $("#show-number").html("<h2>" + "Time Remaining: " + number + "</h2>");
                 if (number === 0) {
                   stop();
-                  $("#show-number").html("<h2>" +"Time is up." + "</h2>");
+                  $("#show-number").html("<h2>" +"Time is up. Click Get Results." + "</h2>");
                 } }
                 function stop() {
                   clearInterval(intervalId);
                 }
     run();
+    
+       // I wanted to try to not allow the radio buttons to be checked after the timer ran out. Could not figure this out.  
+     
+    $("#submit").on("click", score);99999
+
+          var totalQuestions = questions.length;   
+          var rightAnswer = 0;
+          var wrongAnswer = 0;
+
+        function score () {
+          
+        for (i=0; i < questions.length; i++) {
+          if ($('input[name="question-' + i + '"]:checked').val() === questions[i].correctAnswer) {
+          rightAnswer++;
+          } 
+          else {
+          wrongAnswer++;
+          }}
         
-      var totalQuestions = questions.length;   
-      var rightAnswer = 0;
-      var wrongAnswer = 0;
+       $("#results").append("<h3>" + "Total Questions: " + totalQuestions + "</h3>");
+       $("#results").append("<h3>" + "Correct Answers: " + rightAnswer + "</h3>");
+       $("#results").append("<h3>" + "Wrong Answers: " + wrongAnswer + "</h3>");
+          };
+             
 
-    $("#submit").on("click", score);
-     function score () {
-     for (i=0; i < questions.length; i++) {
-       if ($('input[name="questions-' + i + '"]:checked').val() === questions[i].correctAnswer) {
-       
-       rightAnswer++;
-       } 
-       else {
-        wrongAnswer++;
-       }}
-       }
-  
-  score ();
-
-     $("#results").append("<h3>" + "Total Questions: " + totalQuestions + "</h3>");
-     $("#results").append("<h3>" + "Correct Answers: " + rightAnswer + "</h3>");
-     $("#results").append("<h3>" + "Wrong Answers: " + wrongAnswer + "</h3>");     
-
-  stop(); 
+//  wanted to reset the total questions, rightAnswer and wrongAnswer to 0 if the start button was pressed again.
+// Could not figure out how to do this. DId not know where the variables needed to be
+stop();
 
   </script>
 </body>
